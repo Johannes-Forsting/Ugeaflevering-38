@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissors {
@@ -43,7 +44,7 @@ public class RockPaperScissors {
                 } else if (multiplayerResult.equals("player 2")) {
                     player2score++;
                 }
-                System.out.println("So far the scoreline is: \nPLayer 1: " + player1Score + "\nPlayer 2: " + player2score);
+                System.out.println("So far the scoreline is: \n" + player1Name + " " + player1Score + "\n" + player2Name + " " + player2score);
 
             }
         }
@@ -52,8 +53,18 @@ public class RockPaperScissors {
             int bestOfX = roundsCheck(scanner);
             int pointsToVictory = (bestOfX/2 + 1);
 
-            System.out.println("We gonna play " + bestOfX + " rounds.\nWhat do you choose?");
+            System.out.println("We gonna play best of " + bestOfX + " rounds. Lets begin!");
             while (player1Score < pointsToVictory && player2score < pointsToVictory) {
+                String singleplayerMove = singleplayerMakeMove(scanner);
+                String computerMove = computerMakeMove();
+                String multiplayerResult = multiplayerresult(singleplayerMove, computerMove);
+                if (multiplayerResult.equals("player 1")) {
+                    player1Score++;
+                } else if (multiplayerResult.equals("player 2")) {
+                    player2score++;
+                }
+                System.out.println("So far the scoreline is:\n" + player1Name + player1Score + "\nComputer: " + player2score);
+
 
             }
 
@@ -73,6 +84,49 @@ public class RockPaperScissors {
 
 
     }
+    public static String multiplayerresult(String singleplayer, String multiplayer){
+        String result;
+        if (singleplayer.equals(multiplayer)){
+            result = "Tie";
+        }
+        else if (singleplayer.equals("rock") && multiplayer.equals("scissor") || singleplayer.equals("paper") && multiplayer.equals("rock") ||singleplayer.equals("scissor") && multiplayer.equals("paper")){
+            result = "player 1";
+        }
+        else{
+            result = "player 2";
+        }
+        return result;
+    }
+    public static String singleplayerMakeMove(Scanner scanner){
+        boolean isMoveValid = false;
+        String player1Move = "";
+        while (!isMoveValid) {
+            System.out.println("Player 1 what do you choose?");
+            player1Move = scanner.nextLine();
+            player1Move = player1Move.toLowerCase();
+            isMoveValid = moveCheck(player1Move);
+        }
+        return player1Move;
+    }
+
+    public static String computerMakeMove(){
+        Random random = new Random();
+        String computerMove = "";
+        int randomRPS = random.nextInt(3);
+        if (randomRPS == 0){
+            computerMove = "rock";
+        }
+        else if (randomRPS == 1){
+            computerMove = "scissor";
+        }
+        else {
+            computerMove = "paper";
+        }
+        System.out.println("Computer chooses: " + computerMove);
+        return computerMove;
+    }
+
+
     public static String makeMove(Scanner scanner){
         boolean isMoveValid = false;
         String player1Move = "";
