@@ -12,12 +12,18 @@ public class DessertIsland {
 
         //While loop der kun acceptere tal mellem 10-25 (Andre ting end integer vil dog crasher programmet).
         while (true) {
-            amountOfAnswers = scanner.nextInt();
-            if ( amountOfAnswers >= 10 && amountOfAnswers <= 25){
-                break;
+            try {
+                amountOfAnswers = scanner.nextInt();
+                if (amountOfAnswers >= 10 && amountOfAnswers <= 25) {
+                    break;
+                }
+                else{
+                    throw new Exception();
+                }
             }
-            else{
-                System.out.println("I said i recommended a number between 10-25!");
+            catch (Exception e) {
+                scanner.nextLine();
+                    System.out.println("I said i recommended a number between 10-25!");
             }
         }
 
@@ -63,11 +69,26 @@ public class DessertIsland {
 
     //Metode som indtager input fra user og tildeler "point" til den respektive værdi som er blevet valgt.
     public static void pickingItems(String[] itemList, int[] itemListNumberOfPicks, int amountOfAnswers, Scanner scanner){
+        int choice = 0;
         for (int x = 0; x < amountOfAnswers; x++){
-            System.out.println("Person " + (x + 1) + " write what number item you want");
-            int choice = scanner.nextInt();
-            itemListNumberOfPicks[choice - 1]++;
-            System.out.println("You choose: " + itemList[choice - 1] + "\n");
+
+            while (true) {
+                try {
+                    System.out.println("Person " + (x + 1) + " write what number item you want");
+                    choice = scanner.nextInt();
+                    if (choice < 1 || choice > 10){
+                        throw new Exception();
+                    }
+                    itemListNumberOfPicks[choice - 1]++;
+                    System.out.println("You choose: " + itemList[choice - 1] + "\n");
+                    break;
+                }
+                catch (Exception e){
+                    scanner.nextLine();
+                    System.out.println("Please only write a number from the list");
+                }
+
+            }
         }
     }
 }
