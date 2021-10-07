@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class DessertIsland {
     public static void main(String[] args) {
+        //Start
         Scanner scanner = new Scanner(System.in);
         String[] itemList = {"Girlfriend", "Boyfriend", "Gameboy", "Makeup", "Boat", "Firestarter", "Water-filter", "Chair", "Bed", "Boots"};
         int[] itemListNumberOfPicks = new int[10];
         int amountOfAnswers = 0;
         System.out.println("Welcome to the dessert island simulator!!\nPlease write the amount of people you will be testing today. (I recommend 10 - 25 persons). ");
 
-        //While loop der kun acceptere tal mellem 10-25 (Andre ting end integer vil dog crasher programmet).
+        //While loop der kun acceptere tal mellem 10-25
         while (true) {
             try {
                 amountOfAnswers = scanner.nextInt();
